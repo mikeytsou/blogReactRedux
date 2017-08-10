@@ -5,7 +5,7 @@ import { fetchPosts } from '../actions/index';
 
 class PostIndex extends Component {
   // lifecycle method that gets automatically called by react immediatley AFTER this component gets rendered inside the dom
-  // great for fetching data, or load something AFTER this component shows up on the page
+  // great for fetching data(api calls), or load something AFTER this component shows up on the page
   componentDidMount() {
     this.props.fetchPosts();
   }
