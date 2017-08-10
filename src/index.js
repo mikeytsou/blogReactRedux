@@ -17,7 +17,7 @@ ReactDOM.render(
   // Switch component takes in a collection of different routes and renders the first route that matches the url(put your most specific routes at the top)
   <Provider store={createStoreWithMiddleware(reducers)}>
     <BrowserRouter>
-      <div>
+      <div className="ui main text container">
         <Switch>
           <Route path="/posts/new" component={PostNew} />
           <Route exact path="/" component={PostIndex} />
