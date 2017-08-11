@@ -45,8 +45,28 @@ class PostNew extends Component {
   }
 }
 
+function validate(values) {
+  // console.log(values) -> { titles: 'asdad', categories: 'asdqwe', content: 'derssdf' }
+  const errors = {};
+  // validate the inputs from 'values'
+  if (!values.title || values.title.length < 5) {
+    errors.title = 'Enter a title that is at least five characters';
+  }
+
+  if (!values.categories) {
+    errors.categories = 'Enter some categories';
+  }
+
+  if (!values.content) {
+    errors.content = 'Enter some content';
+  }
+  // if errors object is empty, the form is fine to submit
+  // if errors object has any properties, redux-from assumes form is invalid
+  return errors;
+}
+
 // This helper that allows redux form to communicate directly from the component to the reducer
 export default reduxForm({
-  // make sure the string for the form is unique for each form in different components
-  form: 'PostsNewForm'
+  validate, //this function is called automatically at certain points of the forms lifecycle, most notably when users try to submit the form
+  form: 'PostsNewForm' // make sure the string for the form is unique for each form in different components
 })(PostNew);
