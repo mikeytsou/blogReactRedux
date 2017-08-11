@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form'; //reduxForm works very similar to the 'connect' helper from 'react-redux'
 
+// redux-form handles state of our forms like values and validations but not posting to the backend
 class PostNew extends Component {
-  renderField(field) {
+  renderField(field) { // this field object represents a single input or a piece of state
     return (
-      <div className="ui form">
+      <div>
         <label>{field.label}</label>
         <input
           // onChange={field.input.onChange}
@@ -14,17 +15,25 @@ class PostNew extends Component {
           {...field.input} // ...field.input is an object that contains different event handlers(onChange, onBlur, onFocus, etc), props, and the the value of the input
           type="text"
         />
+
+        {field.meta.error}
       </div>
     );
   }
 
+  onSubmit(values) {
+    console.log(values);
+  }
+
   render() {
+    const { handleSubmit } = this.props; // this handleSubmit is passed as props from redux-form
+
     return (
       <div>
-        <form>
+        <form className="ui form" onSubmit={handleSubmit(this.onSubmit.bind(this))}>
           <Field
             label="Title:"
-            name="title"
+            name="title" // this name property must be identical to the properties in the validate function
             component={this.renderField}
           />
 
@@ -39,6 +48,8 @@ class PostNew extends Component {
             name="content"
             component={this.renderField}
           />
+
+          <button className="ui button" type="submit">Submit</button>
         </form>
       </div>
     );
