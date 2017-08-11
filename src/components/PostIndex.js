@@ -1,11 +1,12 @@
 import _ from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { fetchPosts } from '../actions/index';
 
 class PostIndex extends Component {
   // lifecycle method that gets automatically called by react immediatley AFTER this component gets rendered inside the dom
-  // great for fetching data, or load something AFTER this component shows up on the page
+  // great for fetching data(api calls), or load something AFTER this component shows up on the page
   componentDidMount() {
     this.props.fetchPosts();
   }
@@ -21,6 +22,9 @@ class PostIndex extends Component {
   render() {
     return (
       <div>
+        <div className="ui basic right aligned segment">
+          <Link className="ui button" to="/posts/new">Add a Post</Link>
+        </div>
         <h3>Posts</h3>
         <ul className="ui list">
           {this.renderPosts()}
