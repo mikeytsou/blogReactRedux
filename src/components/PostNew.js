@@ -4,8 +4,10 @@ import { Field, reduxForm } from 'redux-form'; //reduxForm works very similar to
 // redux-form handles state of our forms like values and validations but not posting to the backend
 class PostNew extends Component {
   renderField(field) { // this field object represents a single input or a piece of state
+    const className = `field ${field.meta.touched && field.meta.error ? 'error' : ''}`;
+
     return (
-      <div>
+      <div className={className}>
         <label>{field.label}</label>
         <input
           // onChange={field.input.onChange}
@@ -15,8 +17,9 @@ class PostNew extends Component {
           {...field.input} // ...field.input is an object that contains different event handlers(onChange, onBlur, onFocus, etc), props, and the the value of the input
           type="text"
         />
-
-        {field.meta.error}
+        <div id="input-error">
+          {field.meta.touched ? field.meta.error : ''}
+        </div>
       </div>
     );
   }
