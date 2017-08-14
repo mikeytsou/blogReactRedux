@@ -14,8 +14,9 @@ export function fetchPosts() {
   };
 }
 
-export function createPost(values) {
-  const request = axios.post(`http://reduxblog.herokuapp.com/api/posts${API_KEY}`, values); // values is the title, categories, and content of the blog post
+export function createPost(values, callback) {
+  const request = axios.post(`http://reduxblog.herokuapp.com/api/posts${API_KEY}`, values) // values is the title, categories, and content of the blog post
+    .then(() => callback());
 
   return {
     type: CREATE_POST,
