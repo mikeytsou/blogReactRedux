@@ -4,14 +4,23 @@ import { fetchPost } from '../actions/index';
 
 class PostShow extends Component {
   componentDidMount() {
-    const { id } = this.props.match.params.id; // this helper is provided to us from react-router
+    const { id } = this.props.match.params; // this helper is provided to us from react-router
     this.props.fetchPost(id);
   }
 
   render() {
+    // this.props === ownProps
+    const { post } = this.props;
+
+    if (!post) {
+      return <div>Loading...</div>;
+    }
+
     return (
       <div>
-        PostShow!
+        <h3>{post.title}</h3>
+        <h6>Categories: {post.categories}</h6>
+        <p>{post.content}</p>
       </div>
     );
   }
