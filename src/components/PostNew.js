@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form'; //reduxForm works very similar to the 'connect' helper from 'react-redux'
+import { Link } from 'react-router-dom';
+import { createPost } from '../actions/index';
 
 // redux-form handles state of our forms like values and validations but not posting to the backend
 class PostNew extends Component {
@@ -25,7 +28,8 @@ class PostNew extends Component {
   }
 
   onSubmit(values) {
-    console.log(values);
+    // this === component
+    this.props.createPost(values);
   }
 
   render() {
@@ -53,6 +57,7 @@ class PostNew extends Component {
           />
 
           <button className="ui button" type="submit">Submit</button>
+          <Link to="/" className="ui button">Back</Link>
         </form>
       </div>
     );
@@ -83,4 +88,6 @@ function validate(values) {
 export default reduxForm({
   validate, //this function is called automatically at certain points of the forms lifecycle, most notably when users try to submit the form
   form: 'PostsNewForm' // make sure the string for the form is unique for each form in different components
-})(PostNew);
+})(
+  connect(null, { createPost })(PostNew)
+);
