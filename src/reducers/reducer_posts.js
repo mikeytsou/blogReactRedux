@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import { FETCH_POSTS, FETCH_POST } from '../actions/index';
+import { FETCH_POSTS, FETCH_POST, DELETE_POST } from '../actions/index';
 
 export default function (state = {}, action) { // the data should return an object with a id # as the key and the actual post as an obect, like this { 2: {post} }
   switch (action.type) {
@@ -14,6 +14,8 @@ export default function (state = {}, action) { // the data should return an obje
 
       // this is es6 syntax and is doing the exact same thing as above
       return { ...state, [action.payload.data.id]: action.payload.data }; // this is creating a key-value pair(id-post)
+    case DELETE_POST:
+      return _.omit(state, action.payload); // this looks at the state object and if it has a key of the post id, just drop it. it does not modify the exisiting state object and returns a new one
     default:
       return state;
   }
