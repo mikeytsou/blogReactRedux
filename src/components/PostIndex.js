@@ -27,9 +27,11 @@ class PostIndex extends Component {
     return (
       <div>
         <div className="ui basic right aligned segment">
-          <Link className="ui button" to="/posts/new">Add a Post</Link>
+          <Link className="ui inverted green button" to="/posts/new">Add a Post</Link>
         </div>
+
         <h3>Posts</h3>
+
         <ul className="ui list">
           {this.renderPosts()}
         </ul>
