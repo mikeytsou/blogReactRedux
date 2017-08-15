@@ -14,7 +14,11 @@ class PostIndex extends Component {
   renderPosts() {
     return _.map(this.props.posts, (post) => {
       return (
-        <li className="item" key={post.id}>{post.title}</li>
+        <li className="item" key={post.id}>
+          <Link to={`/posts/${post.id}`}>
+            {post.title}
+          </Link>
+        </li>
       );
     });
   }
@@ -23,9 +27,11 @@ class PostIndex extends Component {
     return (
       <div>
         <div className="ui basic right aligned segment">
-          <Link className="ui button" to="/posts/new">Add a Post</Link>
+          <Link className="ui inverted green button" to="/posts/new">Add a Post</Link>
         </div>
+
         <h3>Posts</h3>
+
         <ul className="ui list">
           {this.renderPosts()}
         </ul>

@@ -6,6 +6,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import ReduxPromise from 'redux-promise';
 import PostIndex from './components/PostIndex';
 import PostNew from './components/PostNew';
+import PostShow from './components/PostShow';
 
 import reducers from './reducers';
 
@@ -20,6 +21,7 @@ ReactDOM.render(
       <div className="ui main text container">
         <Switch>
           <Route path="/posts/new" component={PostNew} />
+          <Route path="/posts/:id" component={PostShow} />
           <Route exact path="/" component={PostIndex} />
         </Switch>
       </div>
